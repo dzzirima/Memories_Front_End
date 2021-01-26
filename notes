@@ -1,0 +1,37 @@
+All components starts with a Capital letter
+
+react fragments so that we can return multible stuff <> ....... </>
+
+when it comes to styling we create 
+1.import {makeStyles} from '@material-ui/core/styles'
+2. export default makeStyles(() =>({
+    // it takes a callback function which immediately returns an object...
+
+}))
+3. In app.js say import usestyles from './dsdks.'
+4.in App.js  just before  returning  the object just say .... const classes = usestyles()
+
+.................................selecting multiple lines........................
+alt while selecting
+
+.................... using redux requires a lot of configuration....
+1 create api folder
+    index.js and export define all your end point here and export it
+
+
+1 create a folder called actions
+    post.js
+2.crea ...................reducers
+    post.js
+    index.js
+
+    //initialise your redux in index.js main one ..getElementById
+    provider is going to keep track of a global store that we can acces from anywhere
+    import{createStore,applyMiddleware,compose} from 'redux'
+    import  thunk from 'redux-thunk'
+
+    def: a reducer is a function ,which accepts the state and accepts the actions
+    then based on  the action type it does something and state should always beforeequal to something
+
+    3 .. wrap the app with proviser compnet...
+
