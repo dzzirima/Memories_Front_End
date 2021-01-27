@@ -1,16 +1,18 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {TextField,Button,Typography ,Paper} from '@material-ui/core'
 import FileBase64 from 'react-file-base64'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
+
+ 
 
 import useStyles from './styles'
-import { createPost } from '../../actions/posts'
 
+import { createPost,updatePost } from '../../actions/posts'
 
-
-export const Form = () => {
+export const Form = ({currentId,setCurrentId}) => {
     const dispatch  = useDispatch()
     const classes = useStyles()
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId):null)
 
  const [postData, setpostData] = useState({
      creator:'',
@@ -19,15 +21,36 @@ export const Form = () => {
      tags:'',
      selectedFile:''
  })
+
+ useEffect(() => {
+     if(post) setpostData(post)
+ },[post])
+     
     
 
     const handleSubmit = (e) =>{
-        e.preventDefault()
-        dispatch(createPost(postData))
-
-    } 
-
+        e.preventDefault();
+        
+        if(currentId){
+            dispatch(updatePost(currentId,postData))
+            
+        }else{
+            dispatch(createPost(postData))
+            
+        }
+        clear();
+    }
     const clear = ( ) =>{
+
+        setCurrentId(null);
+        
+        setpostData({
+            creator:'',
+            title:'',
+            message:'',
+            tags:'',
+            selectedFile:''
+        })
 
     }
 
@@ -40,7 +63,7 @@ export const Form = () => {
                     variant = "outlined"
                     label ="Creator" 
                     fullWidth
-                    value = {postData.Creator}
+                    value = {postData.creator}
                     onChange ={(e) =>setpostData({...postData,creator:e.target.value})}
                 />
                 <TextField 
@@ -65,7 +88,7 @@ export const Form = () => {
                     label ="Tags" 
                     fullWidth
                     value= {postData.tags}
-                    onChange ={(e) =>setpostData({...postData,tags:e.target.value})}
+                    onChange ={(e) =>setpostData({...postData,tags:e.target.value.split(',')})}
                 />
                 <div className ={classes.fileInput}>
                     <FileBase64
@@ -76,7 +99,7 @@ export const Form = () => {
                     />
 
                 </div>
-                <Button className = {classes.buttonSubmit}  fullWidth variant ="contained" color = "primary" size = "large" type = "submit"> submit</Button>
+                <Button className = {classes.buttonSubmit}  fullWidth variant ="contained" color = "primary" size = "large" type = "submit" > submit</Button>
                 <Button className variant ="contained"  fullWidth color = "secondary" size = "small" onClick ={clear}> clear</Button>
 
            </form>

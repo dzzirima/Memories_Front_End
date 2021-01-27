@@ -40,4 +40,19 @@ alt while selecting
     ...................practising coding.................
     mem.dev........ check it out
     
+...........in react if we want  to use javascript logic then use { ..}
 
+backgroud css  :https://www.svgbackgrounds.com
+connectin to the backgroud color create index.css and target the body then import in the index.js ie import './index.css'
+
+......................back to the backend......
+when updating something create a patch route coz we are updating the existing document
+
+..........................design.................................
+breakpoints in material ui allows us to run specific css depending on the size of the device...
+[theme.breakpoints.down('sm')]:{
+    mainContainer:{
+        flexdirection:"sdhsh"
+        check index.css
+    }
+}
