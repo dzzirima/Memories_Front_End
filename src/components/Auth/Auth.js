@@ -8,11 +8,15 @@ import Input from './Input';
 
 const Auth = () => {
     const [ShowPassword, setShowPassword] = useState(false)
-    const isSignUp = true;
+   
     const classes = useStyles();
     const handleSubmit = () =>{};
     const handleChange = ()=>{};
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
+    const [isSignUp, setisSignUp] = useState(false)
+    const switchMode = () =>{
+        setisSignUp((prevIsSignup) =>!prevIsSignup)
+    }
 
     return (
         <Container component = "main" maxWidth ="xs">
@@ -45,6 +49,18 @@ const Auth = () => {
                         {isSignUp ? 'Sign Up' : 'Sign In'}
 
                     </Button>
+                    <Grid container justify ="flex-end">
+                        <Grid item>
+                            <Button onClick = {switchMode}>
+                                {/* depending whether we are loged in or not the button is gonna display tittle dynamically */}
+                                
+                                {isSignUp ?"Already have an account? Sign In":"Dont have an account ? Sign Up"}
+
+                            </Button>
+
+                        </Grid>
+
+                    </Grid>
 
                 </form>
             </Paper>
