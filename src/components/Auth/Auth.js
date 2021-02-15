@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 import LockOutLinedIcon from "@material-ui/icons/LockOutlined"
 import {GoogleLogin} from 'react-google-login'
 import {useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 
 
 
@@ -13,6 +14,7 @@ import Icon from './Icon'
 const Auth = () => {
     const [ShowPassword, setShowPassword] = useState(false)
     const dispatch = useDispatch()
+    const history = useHistory()
    
     const classes = useStyles();
     const handleSubmit = () =>{};
@@ -25,6 +27,8 @@ const Auth = () => {
         const token = res?.tokenId
         try {
             dispatch({type:'AUTH',data:{result,token}})
+            // Go back to home page  and history belongs to react-router-dom
+            history.push('/')
             
         } catch (error) {
             console.log(error)
