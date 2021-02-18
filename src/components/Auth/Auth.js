@@ -10,6 +10,7 @@ import {useHistory} from 'react-router-dom'
 import useStyles from './styles'
 import Input from './Input';
 import Icon from './Icon'
+import {signin,sighup} from '../../actions/auth'
 const initialstate = {firstName:'',lastName:'',email: '',password1:'',confirmPassword:''};
 
 const Auth = () => {
@@ -23,6 +24,12 @@ const Auth = () => {
     const handleSubmit = (e) =>{
         // the form will refresh giving us an unwanted behaviour 
         e.preventDefault()
+        
+        if(isSignUp){
+            dispatch(signup(formData,history))
+        }else{
+            dispatch(signup(formData,history))
+        }
         
     };
     const handleChange = (e)=>{
