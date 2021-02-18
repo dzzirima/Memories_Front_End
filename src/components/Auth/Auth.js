@@ -10,15 +10,27 @@ import {useHistory} from 'react-router-dom'
 import useStyles from './styles'
 import Input from './Input';
 import Icon from './Icon'
+const initialstate = {firstName:'',lastName:'',email: '',password1:'',confirmPassword:''};
 
 const Auth = () => {
     const [ShowPassword, setShowPassword] = useState(false)
+    const [formData,setFormData] =  useState(initialstate)
+
     const dispatch = useDispatch()
     const history = useHistory()
    
     const classes = useStyles();
-    const handleSubmit = () =>{};
-    const handleChange = ()=>{};
+    const handleSubmit = (e) =>{
+        // the form will refresh giving us an unwanted behaviour 
+        e.preventDefault()
+        
+    };
+    const handleChange = (e)=>{
+        // this function is called by eachform input 
+        // by pasig the event which triggered it we come to see that we get the things wgich ares specific to the input which changed
+        setFormData({...formData,[e.target.name]:e.target.value})
+
+    };
 
     // this function should be async baba otherwise fire will rain..
     const googleSuccess = async (res) =>{
